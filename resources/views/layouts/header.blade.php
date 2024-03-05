@@ -21,6 +21,9 @@
                      {{ __('Dashboard') }}
                  </x-linku>
                  @if (Auth::user()->role == 'admin')
+                     <x-linku :href="route('admin.courts.index')" :active="request()->routeIs('admin.courts.index')">
+                         {{ __('Courts') }}
+                     </x-linku>
                      <x-linku :href="route('admin.users.index')" :active="request()->routeIs('admin.users.index')">
                          {{ __('Customers') }}
                      </x-linku>
@@ -63,7 +66,7 @@
                      aria-labelledby="dropdown-user"
                      class="absolute z-10 w-40 mt-2 rounded-lg shadow-xl end-0 ltr:origin-top-right rtl:origin-top-left">
                      <div class="rounded-lg bg-white py-2.5 ring-1 ring-black ring-opacity-5">
-                         <a role="menuitem" href="javascript:void(0)"
+                         <a role="menuitem" href="{{ route('profile.edit') }}"
                              class="group flex items-center justify-between gap-1.5 px-4 py-1.5 text-sm font-medium text-neutral-700 hover:bg-neutral-100 hover:text-neutral-950">
                              <span class="grow">Account</span>
                          </a>
@@ -101,14 +104,14 @@
      <!-- Mobile Navigation -->
      <div x-cloak x-show="mobileNavOpen" class="lg:hidden">
          <nav class="flex flex-col gap-2 py-4 border-t border-neutral-200">
-             <a href="javascript:void(0)"
-                 class="group flex items-center gap-2 rounded-lg bg-neutral-100 px-3 py-1.5 text-sm font-medium text-neutral-950">
-                 <span>Dashboard</span>
-             </a>
-             <a href="javascript:void(0)"
-                 class="group flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium text-neutral-800 hover:bg-neutral-100 hover:text-neutral-950 active:bg-neutral-50">
-                 <span>Customers</span>
-             </a>
+             <x-linku :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                 {{ __('Dashboard') }}
+             </x-linku>
+             @if (Auth::user()->role == 'admin')
+                 <x-linku :href="route('admin.users.index')" :active="request()->routeIs('admin.users.index')">
+                     {{ __('Customers') }}
+                 </x-linku>
+             @endif
          </nav>
      </div>
      <!-- END Mobile Navigation -->

@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('courts', function (Blueprint $table) {
             $table->id();
             $table->string('name', 50);
+            $table->string('slug');
             $table->enum('type', ['futsal', 'badminton']);
             $table->text('description');
             $table->string('banner');
+            $table->boolean('is_active')->default(false);
             $table->unsignedBigInteger('weekday_price');
             $table->unsignedBigInteger('weekend_price');
             $table->timestamps();

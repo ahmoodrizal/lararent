@@ -49,6 +49,7 @@
     </style>
 
     <!-- Scripts -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -73,6 +74,7 @@
             @include('layouts.footer')
             <!-- END Page Footer -->
         </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
         <!-- END Page Container -->
     </div>
 </body>
