@@ -62,4 +62,41 @@ class TransactionController extends Controller
             'schedule' => $transaction
         ], 201);
     }
+
+    public function schedule(Request $request)
+    {
+        $request->validate([
+            'court_id' => ['required', 'exists:courts,id'],
+            'booking_date' => ['required', 'date'],
+        ]);
+
+        $booking_date = Carbon::parse($request['booking_date'])->startOfDay();
+        $currentTime = $booking_date->copy()->addHours(9);      // open at 9 am
+
+        $schedules = [];
+
+        while ($currentTime->hour <= 21) {       // close at 9 pm
+            $time = $currentTime->timestamp;
+            // Check if transaction is exists at that time
+            $isBooked = Transaction::where([
+                ['court_id', '=', $request['court_id']],
+                ['booked_at', '=', $currentTime],
+            ])->whereNotIn('status', ['cancelled', 'refund'])
+                ->exists();
+
+            $status = $isBooked ? 'booked' : 'available';
+
+            $schedules[] = [
+                'booking_time' => $time,
+                'status' => $status,
+            ];
+
+            $currentTime->addHour();
+        }
+
+        return response()->json([
+            'message' => 'success',
+            'schedules' => $schedules
+        ], 200);
+    }
 }

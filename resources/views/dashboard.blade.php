@@ -150,7 +150,7 @@
                                 <tr class="border-b-2 border-neutral-100">
                                     <th
                                         class="min-w-[140px] px-3 py-2 text-start text-sm font-semibold uppercase tracking-wider text-neutral-700">
-                                        ID
+                                        TRX-ID
                                     </th>
                                     <th
                                         class="min-w-[180px] px-3 py-2 text-start text-sm font-semibold uppercase tracking-wider text-neutral-700">
@@ -158,11 +158,11 @@
                                     </th>
                                     <th
                                         class="min-w-[180px] px-3 py-2 text-start text-sm font-semibold uppercase tracking-wider text-neutral-700">
-                                        User
+                                        Customer Name
                                     </th>
                                     <th
                                         class="min-w-[180px] px-3 py-2 text-start text-sm font-semibold uppercase tracking-wider text-neutral-700">
-                                        Title
+                                        Court - Booking Time
                                     </th>
                                     <th
                                         class="px-3 py-2 text-sm font-semibold tracking-wider uppercase text-start text-neutral-700">
@@ -177,146 +177,47 @@
 
                             <!-- Table Body -->
                             <tbody>
-                                <tr class="border-b border-neutral-100 hover:bg-neutral-50">
-                                    <td class="p-3 font-semibold text-start text-neutral-600">
-                                        RN#4585
-                                    </td>
-                                    <td class="p-3 text-start text-neutral-600">
-                                        2023-11-15 09:30
-                                    </td>
-                                    <td class="p-3 font-medium text-neutral-600">
-                                        <a href="javascript:void(0)"
-                                            class="underline decoration-neutral-200 decoration-2 underline-offset-4 hover:text-neutral-950 hover:decoration-neutral-300">Alex
-                                            Johnson</a>
-                                    </td>
-                                    <td class="p-3 text-start">
-                                        Unable to Connect to Wi-Fi on Laptop
-                                    </td>
-                                    <td class="p-3 font-medium">
-                                        <div
-                                            class="inline-block px-2 py-1 text-xs font-semibold leading-4 text-purple-800 bg-purple-100 rounded-full whitespace-nowrap">
-                                            New
-                                        </div>
-                                    </td>
-                                    <td class="p-3 font-medium text-end">
-                                        <a href="javascript:void(0)"
-                                            class="inline-flex items-center justify-center gap-2 px-3 py-2 text-sm font-semibold leading-5 bg-white border rounded-lg border-neutral-200 text-neutral-800 hover:border-neutral-300 hover:text-neutral-950 active:border-neutral-200">
-                                            <span>View</span>
-                                            <svg class="hi-mini hi-arrow-right inline-block h-5 w-5 text-neutral-400 group-hover:text-blue-600 group-active:translate-x-0.5"
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                                fill="currentColor" aria-hidden="true">
-                                                <path fill-rule="evenodd"
-                                                    d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                                                    clip-rule="evenodd"></path>
-                                            </svg>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr class="border-b border-neutral-100 hover:bg-neutral-50">
-                                    <td class="p-3 font-semibold text-start text-neutral-600">
-                                        RN#4584
-                                    </td>
-                                    <td class="p-3 text-start text-neutral-600">
-                                        2023-11-10 14:15
-                                    </td>
-                                    <td class="p-3 font-medium text-neutral-600">
-                                        <a href="javascript:void(0)"
-                                            class="underline decoration-neutral-200 decoration-2 underline-offset-4 hover:text-neutral-950 hover:decoration-neutral-300">Jordan
-                                            Smith</a>
-                                    </td>
-                                    <td class="p-3 text-start">
-                                        Email Campaign Software Crashing Frequently
-                                    </td>
-                                    <td class="p-3 font-medium">
-                                        <div
-                                            class="inline-block px-2 py-1 text-xs font-semibold leading-4 text-blue-800 bg-blue-100 rounded-full whitespace-nowrap">
-                                            Awaiting Response
-                                        </div>
-                                    </td>
-                                    <td class="p-3 font-medium text-end">
-                                        <a href="javascript:void(0)"
-                                            class="inline-flex items-center justify-center gap-2 px-3 py-2 text-sm font-semibold leading-5 bg-white border rounded-lg border-neutral-200 text-neutral-800 hover:border-neutral-300 hover:text-neutral-950 active:border-neutral-200">
-                                            <span>View</span>
-                                            <svg class="hi-mini hi-arrow-right inline-block h-5 w-5 text-neutral-400 group-hover:text-blue-600 group-active:translate-x-0.5"
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                                fill="currentColor" aria-hidden="true">
-                                                <path fill-rule="evenodd"
-                                                    d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                                                    clip-rule="evenodd"></path>
-                                            </svg>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr class="border-b border-neutral-100 hover:bg-neutral-50">
-                                    <td class="p-3 font-semibold text-start text-neutral-600">
-                                        RN#4580
-                                    </td>
-                                    <td class="p-3 text-start text-neutral-600">
-                                        2023-11-10 14:15
-                                    </td>
-                                    <td class="p-3 font-medium text-neutral-600">
-                                        <a href="javascript:void(0)"
-                                            class="underline decoration-neutral-200 decoration-2 underline-offset-4 hover:text-neutral-950 hover:decoration-neutral-300">Helen
-                                            Thompson</a>
-                                    </td>
-                                    <td class="p-3 text-start">
-                                        Payroll System Access Denied Error
-                                    </td>
-                                    <td class="p-3 font-medium">
-                                        <div
-                                            class="inline-block px-2 py-1 text-xs font-semibold leading-4 text-orange-800 bg-orange-100 rounded-full whitespace-nowrap">
-                                            Under Investigation
-                                        </div>
-                                    </td>
-                                    <td class="p-3 font-medium text-end">
-                                        <a href="javascript:void(0)"
-                                            class="inline-flex items-center justify-center gap-2 px-3 py-2 text-sm font-semibold leading-5 bg-white border rounded-lg border-neutral-200 text-neutral-800 hover:border-neutral-300 hover:text-neutral-950 active:border-neutral-200">
-                                            <span>View</span>
-                                            <svg class="hi-mini hi-arrow-right inline-block h-5 w-5 text-neutral-400 group-hover:text-blue-600 group-active:translate-x-0.5"
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                                fill="currentColor" aria-hidden="true">
-                                                <path fill-rule="evenodd"
-                                                    d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                                                    clip-rule="evenodd"></path>
-                                            </svg>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr class="border-b border-neutral-100 hover:bg-neutral-50">
-                                    <td class="p-3 font-semibold text-start text-neutral-600">
-                                        RN#4579
-                                    </td>
-                                    <td class="p-3 text-start text-neutral-600">
-                                        2023-10-15 09:15
-                                    </td>
-                                    <td class="p-3 font-medium text-neutral-600">
-                                        <a href="javascript:void(0)"
-                                            class="underline decoration-neutral-200 decoration-2 underline-offset-4 hover:text-neutral-950 hover:decoration-neutral-300">Peter
-                                            Williams</a>
-                                    </td>
-                                    <td class="p-3 text-start">
-                                        CRM Tool Lagging and Freezing
-                                    </td>
-                                    <td class="p-3 font-medium">
-                                        <div
-                                            class="inline-block px-2 py-1 text-xs font-semibold leading-4 rounded-full whitespace-nowrap bg-emerald-100 text-emerald-800">
-                                            Closed
-                                        </div>
-                                    </td>
-                                    <td class="p-3 font-medium text-end">
-                                        <a href="javascript:void(0)"
-                                            class="inline-flex items-center justify-center gap-2 px-3 py-2 text-sm font-semibold leading-5 bg-white border rounded-lg border-neutral-200 text-neutral-800 hover:border-neutral-300 hover:text-neutral-950 active:border-neutral-200">
-                                            <span>View</span>
-                                            <svg class="hi-mini hi-arrow-right inline-block h-5 w-5 text-neutral-400 group-hover:text-blue-600 group-active:translate-x-0.5"
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                                fill="currentColor" aria-hidden="true">
-                                                <path fill-rule="evenodd"
-                                                    d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                                                    clip-rule="evenodd"></path>
-                                            </svg>
-                                        </a>
-                                    </td>
-                                </tr>
+                                @forelse ($transactions as $transaction)
+                                    <tr class="border-b border-neutral-100 hover:bg-neutral-50">
+                                        <td class="p-3 font-semibold text-start text-neutral-600">
+                                            {{ $transaction->unique_code }}
+                                        </td>
+                                        <td class="p-3 text-start text-neutral-600">
+                                            {{ $transaction->created_at->format('j F Y') }}
+                                        </td>
+                                        <td class="p-3 font-medium text-neutral-600">
+                                            <a href="javascript:void(0)"
+                                                class="underline decoration-neutral-200 decoration-2 underline-offset-4 hover:text-neutral-950 hover:decoration-neutral-300">
+                                                {{ $transaction->user->name }} </a>
+                                        </td>
+                                        <td class="p-3 text-start">
+                                            {{ $transaction->court->name }} /
+                                            {{ $transaction->booked_at->format('j F Y - H:i') }}
+                                        </td>
+                                        <td class="p-3 font-medium">
+                                            <x-chirp :status="$transaction->status">{{ $transaction->status }}</x-chirp>
+                                        </td>
+                                        <td class="p-3 font-medium text-end">
+                                            <a href="javascript:void(0)"
+                                                class="inline-flex items-center justify-center gap-2 px-3 py-2 text-sm font-semibold leading-5 bg-white border rounded-lg border-neutral-200 text-neutral-800 hover:border-neutral-300 hover:text-neutral-950 active:border-neutral-200">
+                                                <span>Detail</span>
+                                                <svg class="hi-mini hi-arrow-right inline-block h-5 w-5 text-neutral-400 group-hover:text-blue-600 group-active:translate-x-0.5"
+                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                    fill="currentColor" aria-hidden="true">
+                                                    <path fill-rule="evenodd"
+                                                        d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                                                        clip-rule="evenodd"></path>
+                                                </svg>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr class="border-b border-neutral-100 hover:bg-neutral-50">
+                                        <td colspan="6" class="p-3 font-semibold text-center text-neutral-600">
+                                            Transactions Data Not Found
+                                        </td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                             <!-- END Table Body -->
                         </table>

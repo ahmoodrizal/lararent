@@ -10,6 +10,14 @@ class TransactionController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function dashboard()
+    {
+        $transactions = Transaction::with('user')->latest()->get();
+
+        return view('dashboard', compact('transactions'));
+    }
+
     public function index()
     {
         //

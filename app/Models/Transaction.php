@@ -14,6 +14,10 @@ class Transaction extends Model
         'booked_at', 'expired_at', 'payment_method', 'payment_service', 'payment_code', 'payment_link'
     ];
 
+    protected $casts = [
+        'booked_at' => 'datetime'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
