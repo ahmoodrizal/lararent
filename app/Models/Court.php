@@ -13,6 +13,6 @@ class Court extends Model
 
     public function schedules()
     {
-        return $this->hasMany(Transaction::class);
+        return $this->hasMany(Schedule::class);
     }
 }

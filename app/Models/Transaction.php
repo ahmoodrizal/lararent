@@ -11,7 +11,7 @@ class Transaction extends Model
 
     protected $fillable = [
         'user_id', 'court_id', 'total_price', 'unique_code', 'status',
-        'booked_at', 'expired_at', 'payment_method', 'payment_service', 'payment_code', 'payment_link'
+        'booking_start', 'booking_end', 'expired_at', 'payment_method', 'payment_service', 'payment_code', 'payment_link'
     ];
 
     protected $casts = [
@@ -26,5 +26,10 @@ class Transaction extends Model
     public function court()
     {
         return $this->belongsTo(Court::class);
+    }
+
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class);
     }
 }

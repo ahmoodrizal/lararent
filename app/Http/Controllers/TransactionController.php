@@ -13,7 +13,7 @@ class TransactionController extends Controller
 
     public function dashboard()
     {
-        $transactions = Transaction::with('user')->latest()->get();
+        $transactions = Transaction::with('user')->latest()->take(10)->get();
 
         return view('dashboard', compact('transactions'));
     }

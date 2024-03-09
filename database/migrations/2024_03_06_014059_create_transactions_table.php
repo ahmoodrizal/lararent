@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
-            $table->string('court_id');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('court_id')->constrained()->cascadeOnDelete();
             $table->string('unique_code');
-            $table->enum('status', ['pending', 'success', 'cancelled', 'refund'])->default('pending');
+            $table->timestamp('booking_start');
+            $table->timestamp('booking_end');
             $table->unsignedInteger('total_price');
-            $table->timestamp('booked_at');
+            $table->enum('status', ['pending', 'success', 'cancelled', 'refund'])->default('pending');
             $table->enum('payment_method', ['bank_transfer', 'qris', 'cstore'])->nullable();
             $table->string('payment_service')->nullable();
             $table->string('payment_code')->nullable();     // this column for store response if user select bank or retail method
