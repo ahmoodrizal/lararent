@@ -15,7 +15,8 @@ class Transaction extends Model
     ];
 
     protected $casts = [
-        'booked_at' => 'datetime'
+        'booking_start' => 'datetime',
+        'booking_end' => 'datetime'
     ];
 
     public function user()

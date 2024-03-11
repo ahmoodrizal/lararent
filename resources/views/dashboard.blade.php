@@ -154,15 +154,15 @@
                                     </th>
                                     <th
                                         class="min-w-[180px] px-3 py-2 text-start text-sm font-semibold uppercase tracking-wider text-neutral-700">
-                                        Date
-                                    </th>
-                                    <th
-                                        class="min-w-[180px] px-3 py-2 text-start text-sm font-semibold uppercase tracking-wider text-neutral-700">
                                         Customer Name
                                     </th>
                                     <th
                                         class="min-w-[180px] px-3 py-2 text-start text-sm font-semibold uppercase tracking-wider text-neutral-700">
-                                        Court - Booking Time
+                                        Court
+                                    </th>
+                                    <th
+                                        class="min-w-[180px] px-3 py-2 text-start text-sm font-semibold uppercase tracking-wider text-neutral-700">
+                                        Booking Time
                                     </th>
                                     <th
                                         class="px-3 py-2 text-sm font-semibold tracking-wider uppercase text-start text-neutral-700">
@@ -182,17 +182,17 @@
                                         <td class="p-3 font-semibold text-start text-neutral-600">
                                             {{ $transaction->unique_code }}
                                         </td>
-                                        <td class="p-3 text-start text-neutral-600">
-                                            {{ $transaction->created_at->format('j F Y') }}
-                                        </td>
                                         <td class="p-3 font-medium text-neutral-600">
                                             <a href="javascript:void(0)"
                                                 class="underline decoration-neutral-200 decoration-2 underline-offset-4 hover:text-neutral-950 hover:decoration-neutral-300">
                                                 {{ $transaction->user->name }} </a>
                                         </td>
                                         <td class="p-3 text-start">
-                                            {{ $transaction->court->name }} /
-                                            {{ $transaction->booked_at->format('j F Y - H:i') }}
+                                            {{ $transaction->court->name }}
+                                        </td>
+                                        <td class="p-3 text-start">
+                                            {{ $transaction->booking_start->format('j F Y | H:i') }}
+                                            {{ $transaction->booking_end->format('- H:i') }}
                                         </td>
                                         <td class="p-3 font-medium">
                                             <x-chirp :status="$transaction->status">{{ $transaction->status }}</x-chirp>

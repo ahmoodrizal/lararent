@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Court;
 use App\Models\Schedule;
 use App\Models\Transaction;
+use App\Services\Midtrans\CreateQrCodeService;
+use App\Services\Midtrans\CreateRetailService;
+use App\Services\Midtrans\CreateVirtualAccountService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +20,22 @@ class TransactionController extends Controller
         $court = Court::find($request['court_id']);
         $booked_time = Carbon::createFromTimestamp($request['booking_start']);
         $booked_end = $booked_time->copy()->addHours($request['hours']);
+
+        // Validate booked date only maximum 1 week ahead
+        $future = Carbon::parse($booked_time)->startOfDay()->diffInDays(now()->startOfDay());
+
+        if ($future >= 7) {
+            return response()->json([
+                'message' => 'Sorry, Booking time is only maximum one week ahead'
+            ]);
+        }
+
+        // Validate if booked_time over than 10PM (Closed)
+        if ($booked_end->hour >= 23) {
+            return response()->json([
+                'message' => 'Sorry, Our time only untill 10 PM'
+            ]);
+        }
 
         $exists_schedule = [];
         // Check Schedule
@@ -34,15 +53,6 @@ class TransactionController extends Controller
         if ($exists_schedule) {
             return response()->json([
                 'message' => 'Sorry, this schedule is already booked'
-            ]);
-        }
-
-        // Validate booked date only maximum 1 week ahead
-        $future = Carbon::parse($booked_time)->startOfDay()->diffInDays(now()->startOfDay());
-
-        if ($future >= 7) {
-            return response()->json([
-                'message' => 'Sorry, Booking time is only maximum one week ahead'
             ]);
         }
 
@@ -78,6 +88,29 @@ class TransactionController extends Controller
                 'booking_start' => $time_start,
                 'booking_end' => $time_end,
             ]);
+        }
+
+        if ($request['payment_method'] == 'bank_transfer') {
+            // Midtrans Virtual Account Integration with Core API
+            $midtrans = new CreateVirtualAccountService($transaction->load('user', 'court'));
+            $apiResponse = $midtrans->getVirtualAccount();
+
+            $transaction->payment_code = $apiResponse->va_numbers[0]->va_number;
+            $transaction->save();
+        } elseif ($request['payment_method'] == 'cstore') {
+            // Midtrans Store or Retail Integration with Core API
+            $midtrans = new CreateRetailService($transaction->load('user', 'court'));
+            $apiResponse = $midtrans->getPaymentCode();
+
+            $transaction->payment_code = $apiResponse->payment_code;
+            $transaction->save();
+        } else {
+            // Midtrans QRIS Integration with Core API
+            $midtrans = new CreateQrCodeService($transaction->load('user', 'court'));
+            $apiResponse = $midtrans->getSnapToken();
+
+            $transaction->payment_link = $apiResponse->actions[0]->url;
+            $transaction->save();
         }
 
         return response()->json([

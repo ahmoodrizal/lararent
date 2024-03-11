@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\MidtransCallbackController;
 use App\Http\Controllers\API\TransactionController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,9 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/schedules', [TransactionController::class, 'schedule']);
+
+// Midtrans Callback
+Route::post('/callback', [MidtransCallbackController::class, 'callback']);
 
 // Auth API
 Route::middleware('auth:sanctum')->group(function () {
