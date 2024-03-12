@@ -1,6 +1,12 @@
 <x-app-layout>
     <!-- Page Heading -->
     <div class="container px-4 pt-6 mx-auto lg:px-8 lg:pt-8 xl:max-w-7xl">
+        @if (session('success'))
+            <x-alert :type="__('success')">{{ session('success') }}</x-alert>
+        @endif
+        @if (session('warning'))
+            <x-alert :type="__('warning')">{{ session('warning') }}</x-alert>
+        @endif
         <div class="flex flex-col gap-2 text-center sm:flex-row sm:items-center sm:justify-between sm:text-start">
             <div class="grow">
                 <h1 class="mb-1 text-xl font-bold">Latest Transactions</h1>
@@ -8,7 +14,9 @@
                     Welcome, you have <strong>5 open tickets</strong> and
                     <strong>3 notifications</strong>.
                 </h2> --}}
+
             </div>
+
             <div class="flex items-center justify-center flex-none gap-2 rounded sm:justify-end">
                 <div class="relative">
                     <div
@@ -31,7 +39,7 @@
     <!-- Page Section -->
     <div class="container p-4 mx-auto lg:p-8 xl:max-w-7xl">
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-            {{-- <!-- Quick Statistics -->
+            <!-- Quick Statistics -->
             <a href="javascript:void(0)"
                 class="flex flex-col bg-white border rounded-lg border-neutral-200 hover:border-neutral-300 active:border-neutral-200">
                 <div class="flex items-center justify-between p-5 grow">
@@ -124,7 +132,11 @@
                     Last 30 days
                 </div>
             </a>
-            <!-- END Quick Statistics --> --}}
+            <!-- END Quick Statistics -->
+
+            {{-- Manual Booking Modal Start --}}
+            @include('admin.court.manual_booking')
+            {{-- Manual Booking Modal End --}}
 
             <!-- Tickets -->
             <div class="flex flex-col bg-white border rounded-lg sm:col-span-2 lg:col-span-4">
@@ -133,9 +145,12 @@
                     <div>
                         <h2 class="mb-0.5 font-semibold">Recent transactions</h2>
                     </div>
-                    <div>
+                    <div class="flex items-center gap-x-5">
+                        <a x-data="" x-on:click.prevent="$dispatch('open-modal', 'manual-booking')"
+                            class="inline-flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold leading-5 text-white bg-orange-400 border rounded-lg border-neutral-200 hover:border-neutral-300 active:border-neutral-200"
+                            href="javascript:void(0)">Create Manual Booking</a>
                         <a href="javascript:void(0)"
-                            class="inline-flex items-center justify-center gap-2 px-3 py-2 text-sm font-semibold leading-5 bg-white border rounded-lg border-neutral-200 text-neutral-800 hover:border-neutral-300 hover:text-neutral-950 active:border-neutral-200">
+                            class="inline-flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold leading-5 bg-white border rounded-lg border-neutral-200 text-neutral-800 hover:border-neutral-300 hover:text-neutral-950 active:border-neutral-200">
                             View all transactions
                         </a>
                     </div>
@@ -163,6 +178,10 @@
                                     <th
                                         class="min-w-[180px] px-3 py-2 text-start text-sm font-semibold uppercase tracking-wider text-neutral-700">
                                         Booking Time
+                                    </th>
+                                    <th
+                                        class="min-w-[180px] px-3 py-2 text-start text-sm font-semibold uppercase tracking-wider text-neutral-700">
+                                        Total
                                     </th>
                                     <th
                                         class="px-3 py-2 text-sm font-semibold tracking-wider uppercase text-start text-neutral-700">
@@ -193,6 +212,9 @@
                                         <td class="p-3 text-start">
                                             {{ $transaction->booking_start->format('j F Y | H:i') }}
                                             {{ $transaction->booking_end->format('- H:i') }}
+                                        </td>
+                                        <td class="p-3 font-medium">
+                                            {{ Number::currency($transaction->total_price, 'IDR', 'id_ID') }}
                                         </td>
                                         <td class="p-3 font-medium">
                                             <x-chirp :status="$transaction->status">{{ $transaction->status }}</x-chirp>
@@ -231,3 +253,5 @@
     </div>
     <!-- END Page Section -->
 </x-app-layout>
+<!-- JavaScript to calculate the total price -->
+<script></script>

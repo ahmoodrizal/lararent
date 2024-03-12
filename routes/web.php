@@ -46,6 +46,11 @@ Route::middleware(['auth', 'ensureRole:admin'])->prefix('admin')->name('admin.')
         Route::put('/{court:slug}/toggle-status', [CourtController::class, 'toggleStatus'])->name('toggle');
         Route::post('/', [CourtController::class, 'store'])->name('store');
     });
+
+    // Transaction Management
+    Route::prefix('transactions')->name('transactions.')->group(function () {
+        Route::post('/', [TransactionController::class, 'create'])->name('create');
+    });
 });
 
 require __DIR__ . '/auth.php';

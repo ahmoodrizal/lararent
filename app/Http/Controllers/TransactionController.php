@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Court;
+use App\Models\Schedule;
 use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
@@ -13,9 +17,10 @@ class TransactionController extends Controller
 
     public function dashboard()
     {
-        $transactions = Transaction::with('user')->latest()->take(10)->get();
+        $transactions = Transaction::with('user', 'court')->latest()->take(10)->get();
+        $courts = Court::latest()->get();
 
-        return view('dashboard', compact('transactions'));
+        return view('dashboard', compact('transactions', 'courts'));
     }
 
     public function index()
@@ -26,9 +31,77 @@ class TransactionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $court = Court::find($request['court_id']);
+        $booking_start = Carbon::parse($request['booking_time'])->startOfHour();
+        $booking_end = $booking_start->copy()->addHours($request['hours']);
+
+        // Validate booked date only maximum 1 week ahead
+        $future = Carbon::parse($booking_start)->startOfDay()->diffInDays(now()->startOfDay());
+
+        if ($future >= 7) {
+            return redirect()->back()->with('warning', 'can only book a week ahead');
+        }
+
+        // Validate if booked_time over than 10PM (Closed)
+        if ($booking_end->hour >= 23 || $booking_end->hour < 10) {
+            return redirect()->back()->with('warning', 'Bookings cannot be made later than 9 pm');
+        }
+
+        $exists_schedule = [];
+        // Check Schedule
+        for ($i = 0; $i < $request['hours']; $i++) {
+            $schedule = Schedule::where([
+                ['court_id', '=', $court->id],
+                ['booking_start', '=', $booking_start->copy()->addHours($i)]
+            ])->first();
+
+            if ($schedule) {
+                $exists_schedule[] = $schedule;
+            }
+        }
+
+        if ($exists_schedule) {
+            return redirect()->back()->with('warning', 'This schedule already booked');
+        }
+
+        $data = $request->validate([
+            'court_id' => ['required', 'exists:courts,id'],
+            'booking_time' => ['required', 'date'],
+            'hours' => ['required', 'integer']
+        ]);
+
+
+        // Convert epoch to timestamp for booked_time
+        $data['booking_start'] = $booking_start;
+        $data['booking_end'] = $booking_end;
+
+        // Check if booked date at weekday or weekend to calculate total_price
+        $data['total_price'] = $booking_start->isWeekday() ? $court->weekday_price * $request['hours'] : $court->weekend_price * $request['hours'];
+
+        $data['user_id'] = Auth::user()->id;
+        $data['unique_code'] = 'TRX' . rand(000000, 999999);
+        $data['status'] = 'success';
+        $data['payment_method'] = 'cash';
+        $data['payment_service'] = 'cash';
+        $data['expired_at'] = now()->addHour();
+
+        $transaction = Transaction::create($data);
+
+        // Create Schedule
+        for ($i = 0; $i < $request['hours']; $i++) {
+            $time_start = $booking_start->copy()->addHours($i);
+            $time_end = $time_start->copy()->addHour();
+            Schedule::create([
+                'transaction_id' => $transaction->id,
+                'court_id' => $court->id,
+                'booking_start' => $time_start,
+                'booking_end' => $time_end,
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Transaction Success');
     }
 
     /**
