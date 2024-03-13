@@ -14,7 +14,6 @@
                     Welcome, you have <strong>5 open tickets</strong> and
                     <strong>3 notifications</strong>.
                 </h2> --}}
-
             </div>
 
             <div class="flex items-center justify-center flex-none gap-2 rounded sm:justify-end">
@@ -206,8 +205,10 @@
                                                 class="underline decoration-neutral-200 decoration-2 underline-offset-4 hover:text-neutral-950 hover:decoration-neutral-300">
                                                 {{ $transaction->user->name }} </a>
                                         </td>
-                                        <td class="p-3 text-start">
-                                            {{ $transaction->court->name }}
+                                        <td class="p-3 font-medium text-neutral-600">
+                                            <a href="{{ route('admin.courts.show', $transaction->court) }}"
+                                                class="underline decoration-neutral-200 decoration-2 underline-offset-4 hover:text-neutral-950 hover:decoration-neutral-300">
+                                                {{ $transaction->court->name }} </a>
                                         </td>
                                         <td class="p-3 text-start">
                                             {{ $transaction->booking_start->format('j F Y | H:i') }}

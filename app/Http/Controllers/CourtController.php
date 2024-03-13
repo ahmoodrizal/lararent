@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Court;
+use App\Models\Schedule;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -16,9 +18,34 @@ class CourtController extends Controller
         return view('admin.court.index', compact('courts'));
     }
 
-    public function show(Court $court)
+    public function show(Court $court, Request $request)
     {
-        return view('admin.court.show', compact('court'));
+        if (!$request->query('filter')) {
+            $currentTime = Carbon::now()->startOfDay()->addHours(9);
+        } else {
+            $currentTime = Carbon::parse($request['filter'])->startOfDay()->addHours(9);
+        }
+
+        $schedules = [];
+        while ($currentTime->hour <= 21) {       // close at 9 pm
+            $time = $currentTime->timestamp;
+            // Check if schedule is exists at that time
+            $isBooked = Schedule::where([
+                ['court_id', '=', $court->id],
+                ['booking_start', '=', $currentTime],
+            ])->exists();
+
+            $status = $isBooked ? 'booked' : 'available';
+
+            $schedules[] = [
+                'booking_time' => Carbon::createFromTimestamp($time)->format('H:i'),
+                'status' => $status,
+            ];
+
+            $currentTime->addHour();
+        }
+
+        return view('admin.court.show', compact('court', 'schedules'));
     }
 
     public function create()

@@ -8,6 +8,9 @@
         case 'cancelled':
             $color = 'text-red-800 bg-red-100';
             break;
+        case 'booked':
+            $color = 'text-red-800 bg-red-100';
+            break;
         case 'refund':
             $color = 'text-purple-800 bg-purple-100';
             break;
