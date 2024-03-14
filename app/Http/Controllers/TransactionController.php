@@ -81,7 +81,7 @@ class TransactionController extends Controller
         $data['total_price'] = $booking_start->isWeekday() ? $court->weekday_price * $request['hours'] : $court->weekend_price * $request['hours'];
 
         $data['user_id'] = Auth::user()->id;
-        $data['unique_code'] = 'TRX' . rand(000000, 999999);
+        $data['unique_code'] = 'TRX-' . rand(000000, 999999);
         $data['status'] = 'success';
         $data['payment_method'] = 'cash';
         $data['payment_service'] = 'cash';
@@ -117,7 +117,7 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        //
+        return view('admin.transaction.show', compact('transaction'));
     }
 
     /**

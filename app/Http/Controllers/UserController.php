@@ -13,4 +13,11 @@ class UserController extends Controller
 
         return view('admin.user.index', compact('users'));
     }
+
+    public function show(User $user)
+    {
+        $user->load('transactions.court');
+
+        return view('admin.user.show', compact('user'));
+    }
 }

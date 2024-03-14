@@ -34,6 +34,7 @@ Route::middleware(['auth', 'ensureRole:admin'])->prefix('admin')->name('admin.')
     // User Management
     Route::prefix('users')->name('users.')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::get('/{user}', [UserController::class, 'show'])->name('show');
     });
 
     // Court Management
@@ -50,6 +51,7 @@ Route::middleware(['auth', 'ensureRole:admin'])->prefix('admin')->name('admin.')
     // Transaction Management
     Route::prefix('transactions')->name('transactions.')->group(function () {
         Route::post('/', [TransactionController::class, 'create'])->name('create');
+        Route::get('/{transaction:unique_code}', [TransactionController::class, 'show'])->name('show');
     });
 });
 

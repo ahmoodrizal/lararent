@@ -21,10 +21,10 @@
                      {{ __('Dashboard') }}
                  </x-linku>
                  @if (Auth::user()->role == 'admin')
-                     <x-linku :href="route('admin.courts.index')" :active="request()->routeIs('admin.courts.index')">
+                     <x-linku :href="route('admin.courts.index')" :active="request()->routeIs('admin.courts.*')">
                          {{ __('Courts') }}
                      </x-linku>
-                     <x-linku :href="route('admin.users.index')" :active="request()->routeIs('admin.users.index')">
+                     <x-linku :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
                          {{ __('Customers') }}
                      </x-linku>
                  @endif
@@ -108,7 +108,10 @@
                  {{ __('Dashboard') }}
              </x-linku>
              @if (Auth::user()->role == 'admin')
-                 <x-linku :href="route('admin.users.index')" :active="request()->routeIs('admin.users.index')">
+                 <x-linku :href="route('admin.courts.index')" :active="request()->routeIs('admin.courts.*')">
+                     {{ __('Courts') }}
+                 </x-linku>
+                 <x-linku :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
                      {{ __('Customers') }}
                  </x-linku>
              @endif

@@ -137,6 +137,7 @@
             @include('admin.court.manual_booking')
             {{-- Manual Booking Modal End --}}
 
+
             <!-- Tickets -->
             <div class="flex flex-col bg-white border rounded-lg sm:col-span-2 lg:col-span-4">
                 <div
@@ -196,12 +197,13 @@
                             <!-- Table Body -->
                             <tbody>
                                 @forelse ($transactions as $transaction)
+                                    @include('admin.transaction.show');
                                     <tr class="border-b border-neutral-100 hover:bg-neutral-50">
                                         <td class="p-3 font-semibold text-start text-neutral-600">
                                             {{ $transaction->unique_code }}
                                         </td>
                                         <td class="p-3 font-medium text-neutral-600">
-                                            <a href="javascript:void(0)"
+                                            <a href="{{ route('admin.users.show', $transaction->user) }}"
                                                 class="underline decoration-neutral-200 decoration-2 underline-offset-4 hover:text-neutral-950 hover:decoration-neutral-300">
                                                 {{ $transaction->user->name }} </a>
                                         </td>
@@ -221,7 +223,9 @@
                                             <x-chirp :status="$transaction->status">{{ $transaction->status }}</x-chirp>
                                         </td>
                                         <td class="p-3 font-medium text-end">
-                                            <a href="javascript:void(0)"
+                                            <a x-data=""
+                                                x-on:click.prevent="$dispatch('open-modal', 'transaction-detail-{{ $transaction->id }}')"
+                                                href="javascript:void(0)"
                                                 class="inline-flex items-center justify-center gap-2 px-3 py-2 text-sm font-semibold leading-5 bg-white border rounded-lg border-neutral-200 text-neutral-800 hover:border-neutral-300 hover:text-neutral-950 active:border-neutral-200">
                                                 <span>Detail</span>
                                                 <svg class="hi-mini hi-arrow-right inline-block h-5 w-5 text-neutral-400 group-hover:text-blue-600 group-active:translate-x-0.5"
@@ -236,7 +240,8 @@
                                     </tr>
                                 @empty
                                     <tr class="border-b border-neutral-100 hover:bg-neutral-50">
-                                        <td colspan="6" class="p-3 font-semibold text-center text-neutral-600">
+                                        <td colspan="7"
+                                            class="px-3 py-8 font-semibold text-center text-neutral-600">
                                             Transactions Data Not Found
                                         </td>
                                     </tr>
