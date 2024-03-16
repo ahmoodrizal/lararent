@@ -29,7 +29,7 @@
             <div class="">
                 <x-input-label for="hours" value="{{ __('Hours') }}" class="sr-only" />
                 <x-text-input id="hours" name="hours" type="number" class="block w-full mt-1"
-                    placeholder="{{ __('hours') }}" />
+                    placeholder="{{ __('total hours') }}" />
                 <x-input-error :messages="$errors->get('hours')" class="mt-2" />
             </div>
         </div>

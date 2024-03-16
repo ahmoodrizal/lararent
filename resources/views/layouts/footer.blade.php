@@ -3,7 +3,7 @@
         class="container flex flex-col px-4 mx-auto text-sm text-center md:flex-row md:justify-between md:text-start lg:px-8 xl:max-w-7xl">
         <div class="pt-4 pb-1 md:pb-4">
             ©
-            <span class="font-medium">TailDesk</span>
+            <span class="font-medium">ahmoodrizal</span>
         </div>
         <div class="inline-flex items-center justify-center pt-1 pb-4 md:pt-4">
             <span>Crafted with</span>
@@ -15,8 +15,8 @@
             </svg>
             <span>
                 by
-                <a href="https://pixelcave.com" class="font-medium text-blue-600 hover:text-blue-400"
-                    target="_blank">pixelcave</a></span>
+                <a href="javascript:void(0)" class="font-medium text-blue-600 hover:text-blue-400"
+                    target="_blank">Sewa.In</a></span>
         </div>
     </div>
 </footer>

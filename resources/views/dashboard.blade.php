@@ -100,10 +100,10 @@
                         <a x-data="" x-on:click.prevent="$dispatch('open-modal', 'manual-booking')"
                             class="inline-flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold leading-5 text-white bg-orange-400 border rounded-lg border-neutral-200 hover:border-neutral-300 active:border-neutral-200"
                             href="javascript:void(0)">Create Manual Booking</a>
-                        <a href="javascript:void(0)"
+                        {{-- <a href="javascript:void(0)"
                             class="inline-flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold leading-5 bg-white border rounded-lg border-neutral-200 text-neutral-800 hover:border-neutral-300 hover:text-neutral-950 active:border-neutral-200">
                             View all transactions
-                        </a>
+                        </a> --}}
                     </div>
                 </div>
                 <div class="p-5">
