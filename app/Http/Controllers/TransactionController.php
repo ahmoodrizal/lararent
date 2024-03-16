@@ -18,9 +18,18 @@ class TransactionController extends Controller
     public function dashboard()
     {
         $transactions = Transaction::with('user', 'court')->latest()->take(10)->get();
-        $courts = Court::latest()->get();
+        $courts = Court::whereIsActive(true)->get();
 
-        return view('dashboard', compact('transactions', 'courts'));
+        // Statistic
+        $revenueData = Transaction::selectRaw('COUNT(*) as count, SUM(total_price) as sum')
+            ->whereYear('created_at', now()->year)
+            ->whereMonth('created_at', now()->month)
+            ->whereStatus('success')
+            ->first();
+
+        $today = Transaction::selectRaw('COUNT(*) as count')->whereDate('booking_start', now())->first();
+
+        return view('dashboard', compact('transactions', 'courts', 'revenueData', 'today'));
     }
 
     public function index()

@@ -27,8 +27,8 @@
                                 clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <input type="text" id="search" name="search" placeholder="Search everything.."
-                        class="block w-full py-2 leading-6 border rounded-lg border-neutral-200 pe-3 ps-10 placeholder-neutral-500 focus:border-neutral-500 focus:ring focus:ring-neutral-500 focus:ring-opacity-25" />
+                    <input type="text" id="search" name="search" placeholder="Search transactions"
+                        class="block w-full py-2 text-sm leading-6 border rounded-lg border-neutral-200 pe-3 ps-10 placeholder-neutral-500 focus:border-neutral-500 focus:ring focus:ring-neutral-500 focus:ring-opacity-25" />
                 </div>
             </div>
         </div>
@@ -37,98 +37,49 @@
 
     <!-- Page Section -->
     <div class="container p-4 mx-auto lg:p-8 xl:max-w-7xl">
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
             <!-- Quick Statistics -->
             <a href="javascript:void(0)"
                 class="flex flex-col bg-white border rounded-lg border-neutral-200 hover:border-neutral-300 active:border-neutral-200">
                 <div class="flex items-center justify-between p-5 grow">
                     <dl>
-                        <dt class="text-2xl font-bold">5</dt>
+                        <dt class="text-2xl font-bold">{{ $today['count'] }}</dt>
                         <dd class="text-sm font-medium text-neutral-500">
-                            Open Tickets
+                            Active Schedules
                         </dd>
                     </dl>
-                    <div class="flex items-center text-sm font-medium text-emerald-500">
-                        <svg class="inline-block w-5 h-5 hi-mini hi-arrow-down" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path fill-rule="evenodd"
-                                d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        <span>5%</span>
-                    </div>
                 </div>
                 <div class="px-5 py-3 text-xs font-medium text-orange-500 border-t border-neutral-100">
-                    Assigned to you
+                    Today's Schedules
                 </div>
             </a>
             <a href="javascript:void(0)"
                 class="flex flex-col bg-white border rounded-lg border-neutral-200 hover:border-neutral-300 active:border-neutral-200">
                 <div class="flex items-center justify-between p-5 grow">
                     <dl>
-                        <dt class="text-2xl font-bold">28</dt>
+                        <dt class="text-2xl font-bold">{{ $revenueData['count'] }}</dt>
                         <dd class="text-sm font-medium text-neutral-500">
-                            Open Tickets
+                            Transactions
                         </dd>
                     </dl>
-                    <div class="flex items-center text-sm font-medium text-emerald-500">
-                        <svg class="inline-block w-5 h-5 hi-mini hi-arrow-down" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path fill-rule="evenodd"
-                                d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        <span>12%</span>
-                    </div>
                 </div>
                 <div class="px-5 py-3 text-xs font-medium border-t border-neutral-100 text-neutral-500">
-                    In total
+                    This Month
                 </div>
             </a>
             <a href="javascript:void(0)"
                 class="flex flex-col bg-white border rounded-lg border-neutral-200 hover:border-neutral-300 active:border-neutral-200">
                 <div class="flex items-center justify-between p-5 grow">
                     <dl>
-                        <dt class="text-2xl font-bold">792</dt>
+                        <dt class="text-2xl font-bold"> {{ Number::currency($revenueData['sum'] ?? 0, 'IDR', 'id_ID') }}
+                        </dt>
                         <dd class="text-sm font-medium text-neutral-500">
-                            Closed Tickets
+                            Total Income
                         </dd>
                     </dl>
-                    <div class="flex items-center text-sm font-medium text-rose-500">
-                        <svg class="inline-block w-5 h-5 hi-mini hi-arrow-down" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path fill-rule="evenodd"
-                                d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        <span>7,5%</span>
-                    </div>
                 </div>
                 <div class="px-5 py-3 text-xs font-medium border-t border-neutral-100 text-neutral-500">
-                    Last 30 days
-                </div>
-            </a>
-            <a href="javascript:void(0)"
-                class="flex flex-col bg-white border rounded-lg border-neutral-200 hover:border-neutral-300 active:border-neutral-200">
-                <div class="flex items-center justify-between p-5 grow">
-                    <dl>
-                        <dt class="text-2xl font-bold">2,580</dt>
-                        <dd class="text-sm font-medium text-neutral-500">
-                            All Customers
-                        </dd>
-                    </dl>
-                    <div class="flex items-center text-sm font-medium text-emerald-500">
-                        <svg class="inline-block w-5 h-5 hi-mini hi-arrow-small-up" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path fill-rule="evenodd"
-                                d="M10 15a.75.75 0 01-.75-.75V7.612L7.29 9.77a.75.75 0 01-1.08-1.04l3.25-3.5a.75.75 0 011.08 0l3.25 3.5a.75.75 0 11-1.08 1.04l-1.96-2.158v6.638A.75.75 0 0110 15z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        <span>25%</span>
-                    </div>
-                </div>
-                <div class="px-5 py-3 text-xs font-medium border-t border-neutral-100 text-neutral-500">
-                    Last 30 days
+                    This Month
                 </div>
             </a>
             <!-- END Quick Statistics -->
@@ -197,7 +148,7 @@
                             <!-- Table Body -->
                             <tbody>
                                 @forelse ($transactions as $transaction)
-                                    @include('admin.transaction.show');
+                                    @include('admin.transaction.show')
                                     <tr class="border-b border-neutral-100 hover:bg-neutral-50">
                                         <td class="p-3 font-semibold text-start text-neutral-600">
                                             {{ $transaction->unique_code }}
@@ -240,8 +191,7 @@
                                     </tr>
                                 @empty
                                     <tr class="border-b border-neutral-100 hover:bg-neutral-50">
-                                        <td colspan="7"
-                                            class="px-3 py-8 font-semibold text-center text-neutral-600">
+                                        <td colspan="7" class="px-3 py-8 font-semibold text-center text-neutral-600">
                                             Transactions Data Not Found
                                         </td>
                                     </tr>
@@ -259,5 +209,3 @@
     </div>
     <!-- END Page Section -->
 </x-app-layout>
-<!-- JavaScript to calculate the total price -->
-<script></script>

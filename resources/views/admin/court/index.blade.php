@@ -1,27 +1,5 @@
 <x-app-layout>
     <!-- Page Heading -->
-    <div class="container px-4 pt-6 mx-auto lg:px-8 lg:pt-8 xl:max-w-7xl">
-        <div class="flex flex-col gap-2 text-center sm:flex-row sm:items-center sm:justify-between sm:text-start">
-            <div class="grow">
-                <h1 class="mb-1 text-xl font-bold">Courts Data</h1>
-            </div>
-            <div class="flex items-center justify-center flex-none gap-2 rounded sm:justify-end">
-                <div class="relative">
-                    <div
-                        class="absolute inset-y-0 flex items-center justify-center w-10 my-px rounded-l-lg pointer-events-none start-0 ms-px text-neutral-500">
-                        <svg class="inline-block w-5 h-5 hi-mini hi-magnifying-glass" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path fill-rule="evenodd"
-                                d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <input type="text" id="search" name="search" placeholder="Search everything.."
-                        class="block w-full py-2 leading-6 border rounded-lg border-neutral-200 pe-3 ps-10 placeholder-neutral-500 focus:border-neutral-500 focus:ring focus:ring-neutral-500 focus:ring-opacity-25" />
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- END Page Heading -->
 
     <!-- Page Section -->

@@ -16,8 +16,8 @@
                                 clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <input type="text" id="search" name="search" placeholder="Search everything.."
-                        class="block w-full py-2 leading-6 border rounded-lg border-neutral-200 pe-3 ps-10 placeholder-neutral-500 focus:border-neutral-500 focus:ring focus:ring-neutral-500 focus:ring-opacity-25" />
+                    <input type="text" id="search" name="search" placeholder="Search users"
+                        class="block w-full py-2 text-sm leading-6 border rounded-lg border-neutral-200 pe-3 ps-10 placeholder-neutral-500 focus:border-neutral-500 focus:ring focus:ring-neutral-500 focus:ring-opacity-25" />
                 </div>
             </div>
         </div>
