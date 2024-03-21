@@ -47,7 +47,11 @@ class CreateRetailService extends Midtrans
             'cstore' => [
                 'store' => $this->transaction->payment_service,
                 'message' =>  Str::upper($this->transaction->unique_code)
-            ]
+            ],
+            'custom_expiry' => [
+                "expiry_duration" => 60,
+                "unit" => "minute"
+            ],
         ];
 
         $response = CoreApi::charge($params);

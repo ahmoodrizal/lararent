@@ -45,7 +45,11 @@ class CreateVirtualAccountService extends Midtrans
             ],
             'bank_transfer' => [
                 'bank' => $this->transaction->payment_service,
-            ]
+            ],
+            'custom_expiry' => [
+                "expiry_duration" => 60,
+                "unit" => "minute"
+            ],
         ];
 
         $response = CoreApi::charge($params);

@@ -145,7 +145,7 @@ class TransactionController extends Controller
                 ['booking_start', '=', $currentTime],
             ])->exists();
 
-            $status = $isBooked ? 'booked' : 'available';
+            $status = $isBooked ? 'Booked' : 'Available';
 
             $schedules[] = [
                 'booking_time' => $time,
