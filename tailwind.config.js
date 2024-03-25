@@ -15,6 +15,10 @@ export default {
                 sans: ["Figtree", ...defaultTheme.fontFamily.sans],
                 header: ["Inknut Antiqua", ...defaultTheme.fontFamily.serif],
             },
+            backgroundImage: {
+                "hero-background":
+                    "url('/public/images/tiago-aleixo-ToUPFfxkmw8-unsplash.jpg')",
+            },
         },
     },
 

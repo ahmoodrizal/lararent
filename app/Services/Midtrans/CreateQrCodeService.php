@@ -32,11 +32,6 @@ class CreateQrCodeService extends Midtrans
             'name' => 'Booking ' . $this->transaction->court->name,
         ];
 
-        $page_expire = [
-            'duration' => 120,
-            'unit' => 'minutes'
-        ];
-
         $params = [
             'payment_type' => $this->transaction->payment_service,
             'transaction_details' => [

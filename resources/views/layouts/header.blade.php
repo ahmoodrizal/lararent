@@ -3,7 +3,7 @@
          <!-- Left Section -->
          <div class="flex items-center gap-2 lg:gap-6">
              <!-- Logo -->
-             <a href="javascript:void(0)"
+             <a href="/"
                  class="group inline-flex mb-2 items-baseline gap-1.5 text-lg font-bold tracking-wide text-neutral-900 hover:text-neutral-600">
                  <svg width="28" height="28" viewBox="0 0 95 95" fill="none" xmlns="http://www.w3.org/2000/svg">
                      <path
@@ -17,16 +17,18 @@
 
              <!-- Desktop Navigation -->
              <nav class="items-center hidden gap-2 lg:flex">
-                 <x-linku :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                     {{ __('Dashboard') }}
-                 </x-linku>
-                 @if (Auth::user()->role == 'admin')
-                     <x-linku :href="route('admin.courts.index')" :active="request()->routeIs('admin.courts.*')">
-                         {{ __('Courts') }}
-                     </x-linku>
-                     <x-linku :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
-                         {{ __('Customers') }}
-                     </x-linku>
+                 @auth
+                     @if (Auth::user()->role == 'admin')
+                         <x-linku :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                             {{ __('Dashboard') }}
+                         </x-linku>
+                         <x-linku :href="route('admin.courts.index')" :active="request()->routeIs('admin.courts.*')">
+                             {{ __('Courts') }}
+                         </x-linku>
+                         <x-linku :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                             {{ __('Customers') }}
+                         </x-linku>
+                     @endauth
                  @endif
              </nav>
              <!-- END Desktop Navigation -->
@@ -34,87 +36,161 @@
          <!-- END Left Section -->
 
          <!-- Right Section -->
-         <div class="flex items-center gap-2">
-             <!-- User Dropdown -->
-             <div class="relative inline-block">
-                 <!-- Dropdown Toggle Button -->
-                 <button x-on:click="userDropdownOpen = !userDropdownOpen" x-bind:aria-expanded="userDropdownOpen"
-                     type="button" id="dropdown-user"
-                     class="inline-flex items-center justify-center gap-1 px-3 py-2 text-sm font-semibold leading-5 bg-white border rounded-lg border-neutral-200 text-neutral-800 hover:border-neutral-300 hover:text-neutral-950 active:border-neutral-200"
-                     aria-haspopup="true">
-                     <svg class="inline-block w-5 h-5 hi-mini hi-user-circle sm:hidden"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                         <path fill-rule="evenodd"
-                             d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-5.5-2.5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zM10 12a5.99 5.99 0 00-4.793 2.39A6.483 6.483 0 0010 16.5a6.483 6.483 0 004.793-2.11A5.99 5.99 0 0010 12z"
-                             clip-rule="evenodd" />
-                     </svg>
-                     <span class="hidden sm:inline">{{ auth()->user()->name }}</span>
-                     <svg class="hidden w-5 h-5 hi-mini hi-chevron-down opacity-40 sm:inline-block"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                         <path fill-rule="evenodd"
-                             d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                             clip-rule="evenodd" />
-                     </svg>
-                 </button>
-                 <!-- END Dropdown Toggle Button -->
+         @guest
+             @if (Route::has('login'))
+                 <div class="flex items-center gap-2">
+                     <!-- User Dropdown -->
+                     <div class="relative inline-block">
+                         <!-- Dropdown Toggle Button -->
+                         <button x-on:click="userDropdownOpen = !userDropdownOpen" x-bind:aria-expanded="userDropdownOpen"
+                             type="button" id="dropdown-user"
+                             class="inline-flex items-center justify-center gap-1 px-3 py-2 text-sm font-semibold leading-5 bg-white border rounded-lg border-neutral-200 text-neutral-800 hover:border-neutral-300 hover:text-neutral-950 active:border-neutral-200"
+                             aria-haspopup="true">
+                             <svg class="inline-block w-5 h-5 hi-mini hi-user-circle sm:hidden"
+                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                 aria-hidden="true">
+                                 <path fill-rule="evenodd"
+                                     d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-5.5-2.5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zM10 12a5.99 5.99 0 00-4.793 2.39A6.483 6.483 0 0010 16.5a6.483 6.483 0 004.793-2.11A5.99 5.99 0 0010 12z"
+                                     clip-rule="evenodd" />
+                             </svg>
+                             <span class="hidden sm:inline">My Account</span>
+                             <svg class="hidden w-5 h-5 hi-mini hi-chevron-down opacity-40 sm:inline-block"
+                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                 aria-hidden="true">
+                                 <path fill-rule="evenodd"
+                                     d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                     clip-rule="evenodd" />
+                             </svg>
+                         </button>
+                         <!-- END Dropdown Toggle Button -->
 
-                 <!-- Dropdown -->
-                 <div x-cloak x-show="userDropdownOpen" x-transition:enter="transition ease-out duration-100"
-                     x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-                     x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100"
-                     x-transition:leave-end="opacity-0" x-on:click.outside="userDropdownOpen = false" role="menu"
-                     aria-labelledby="dropdown-user"
-                     class="absolute z-10 w-40 mt-2 rounded-lg shadow-xl end-0 ltr:origin-top-right rtl:origin-top-left">
-                     <div class="rounded-lg bg-white py-2.5 ring-1 ring-black ring-opacity-5">
-                         <a role="menuitem" href="{{ route('profile.edit') }}"
-                             class="group flex items-center justify-between gap-1.5 px-4 py-1.5 text-sm font-medium text-neutral-700 hover:bg-neutral-100 hover:text-neutral-950">
-                             <span class="grow">Account</span>
-                         </a>
-                         <hr class="my-2.5 border-neutral-100" />
-                         <form method="post" action="{{ route('logout') }}">
-                             @csrf
-                             <button type="submit" role="menuitem"
-                                 class="group flex w-full items-center justify-between gap-1.5 px-4 py-1.5 text-start text-sm font-medium text-neutral-700 hover:bg-neutral-100 hover:text-neutral-950">
-                                 <span class="grow">Sign out</span>
-                             </button>
-                         </form>
+                         <!-- Dropdown -->
+                         <div x-cloak x-show="userDropdownOpen" x-transition:enter="transition ease-out duration-100"
+                             x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                             x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100"
+                             x-transition:leave-end="opacity-0" x-on:click.outside="userDropdownOpen = false" role="menu"
+                             aria-labelledby="dropdown-user"
+                             class="absolute z-10 w-40 mt-2 rounded-lg shadow-xl end-0 ltr:origin-top-right rtl:origin-top-left">
+                             <div class="rounded-lg bg-white py-2.5 ring-1 ring-black ring-opacity-5">
+                                 <a role="menuitem" href="{{ route('login') }}"
+                                     class="group flex items-center justify-between gap-1.5 px-4 py-1.5 text-sm font-medium text-neutral-700 hover:bg-neutral-100 hover:text-neutral-950">
+                                     <span class="grow">Sign In</span>
+                                 </a>
+                                 <hr class="my-2.5 border-neutral-100" />
+
+                                 <a href="{{ route('register') }}" role="menuitem"
+                                     class="group flex w-full items-center justify-between gap-1.5 px-4 py-1.5 text-start text-sm font-medium text-neutral-700 hover:bg-neutral-100 hover:text-neutral-950">
+                                     <span class="grow">Register</span>
+                                 </a>
+                             </div>
+                         </div>
+                         <!-- END Dropdown -->
                      </div>
-                 </div>
-                 <!-- END Dropdown -->
-             </div>
-             <!-- END User Dropdown -->
+                     <!-- END User Dropdown -->
 
-             <!-- Toggle Mobile Navigation -->
-             <div class="lg:hidden">
-                 <button x-on:click="mobileNavOpen = !mobileNavOpen" type="button"
-                     class="inline-flex items-center justify-center gap-2 px-3 py-2 text-sm font-semibold leading-5 bg-white border rounded-lg border-neutral-200 text-neutral-800 hover:border-neutral-300 hover:text-neutral-950 active:border-neutral-200">
-                     <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
-                         class="inline-block w-5 h-5 hi-solid hi-menu">
-                         <path fill-rule="evenodd"
-                             d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                             clip-rule="evenodd"></path>
-                     </svg>
-                 </button>
+                     <!-- Toggle Mobile Navigation -->
+                     <div class="lg:hidden">
+                         <button x-on:click="mobileNavOpen = !mobileNavOpen" type="button"
+                             class="inline-flex items-center justify-center gap-2 px-3 py-2 text-sm font-semibold leading-5 bg-white border rounded-lg border-neutral-200 text-neutral-800 hover:border-neutral-300 hover:text-neutral-950 active:border-neutral-200">
+                             <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                                 class="inline-block w-5 h-5 hi-solid hi-menu">
+                                 <path fill-rule="evenodd"
+                                     d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                     clip-rule="evenodd"></path>
+                             </svg>
+                         </button>
+                     </div>
+                     <!-- END Toggle Mobile Navigation -->
+                 </div>
+                 <!-- END Right Section -->
+             @endif
+         @endguest
+         @auth
+             <div class="flex items-center gap-2">
+                 <!-- User Dropdown -->
+                 <div class="relative inline-block">
+                     <!-- Dropdown Toggle Button -->
+                     <button x-on:click="userDropdownOpen = !userDropdownOpen" x-bind:aria-expanded="userDropdownOpen"
+                         type="button" id="dropdown-user"
+                         class="inline-flex items-center justify-center gap-1 px-3 py-2 text-sm font-semibold leading-5 bg-white border rounded-lg border-neutral-200 text-neutral-800 hover:border-neutral-300 hover:text-neutral-950 active:border-neutral-200"
+                         aria-haspopup="true">
+                         <svg class="inline-block w-5 h-5 hi-mini hi-user-circle sm:hidden"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                             <path fill-rule="evenodd"
+                                 d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-5.5-2.5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zM10 12a5.99 5.99 0 00-4.793 2.39A6.483 6.483 0 0010 16.5a6.483 6.483 0 004.793-2.11A5.99 5.99 0 0010 12z"
+                                 clip-rule="evenodd" />
+                         </svg>
+                         <span class="hidden sm:inline">{{ auth()->user()->name }}</span>
+                         <svg class="hidden w-5 h-5 hi-mini hi-chevron-down opacity-40 sm:inline-block"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                             <path fill-rule="evenodd"
+                                 d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                 clip-rule="evenodd" />
+                         </svg>
+                     </button>
+                     <!-- END Dropdown Toggle Button -->
+
+                     <!-- Dropdown -->
+                     <div x-cloak x-show="userDropdownOpen" x-transition:enter="transition ease-out duration-100"
+                         x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                         x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100"
+                         x-transition:leave-end="opacity-0" x-on:click.outside="userDropdownOpen = false" role="menu"
+                         aria-labelledby="dropdown-user"
+                         class="absolute z-10 w-40 mt-2 rounded-lg shadow-xl end-0 ltr:origin-top-right rtl:origin-top-left">
+                         <div class="rounded-lg bg-white py-2.5 ring-1 ring-black ring-opacity-5">
+                             <a role="menuitem" href="{{ route('profile.edit') }}"
+                                 class="group flex items-center justify-between gap-1.5 px-4 py-1.5 text-sm font-medium text-neutral-700 hover:bg-neutral-100 hover:text-neutral-950">
+                                 <span class="grow">Account</span>
+                             </a>
+                             <hr class="my-2.5 border-neutral-100" />
+                             <form method="post" action="{{ route('logout') }}">
+                                 @csrf
+                                 <button type="submit" role="menuitem"
+                                     class="group flex w-full items-center justify-between gap-1.5 px-4 py-1.5 text-start text-sm font-medium text-neutral-700 hover:bg-neutral-100 hover:text-neutral-950">
+                                     <span class="grow">Sign out</span>
+                                 </button>
+                             </form>
+                         </div>
+                     </div>
+                     <!-- END Dropdown -->
+                 </div>
+                 <!-- END User Dropdown -->
+
+                 <!-- Toggle Mobile Navigation -->
+                 <div class="lg:hidden">
+                     <button x-on:click="mobileNavOpen = !mobileNavOpen" type="button"
+                         class="inline-flex items-center justify-center gap-2 px-3 py-2 text-sm font-semibold leading-5 bg-white border rounded-lg border-neutral-200 text-neutral-800 hover:border-neutral-300 hover:text-neutral-950 active:border-neutral-200">
+                         <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                             class="inline-block w-5 h-5 hi-solid hi-menu">
+                             <path fill-rule="evenodd"
+                                 d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                 clip-rule="evenodd"></path>
+                         </svg>
+                     </button>
+                 </div>
+                 <!-- END Toggle Mobile Navigation -->
              </div>
-             <!-- END Toggle Mobile Navigation -->
+             <!-- END Right Section -->
          </div>
-         <!-- END Right Section -->
-     </div>
+     @endauth
 
      <!-- Mobile Navigation -->
      <div x-cloak x-show="mobileNavOpen" class="lg:hidden">
          <nav class="flex flex-col gap-2 py-4 border-t border-neutral-200">
-             <x-linku :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                 {{ __('Dashboard') }}
-             </x-linku>
-             @if (Auth::user()->role == 'admin')
-                 <x-linku :href="route('admin.courts.index')" :active="request()->routeIs('admin.courts.*')">
-                     {{ __('Courts') }}
-                 </x-linku>
-                 <x-linku :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
-                     {{ __('Customers') }}
-                 </x-linku>
-             @endif
+             @auth
+                 @if (Auth::user()->role == 'admin')
+                     <x-linku :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                         {{ __('Dashboard') }}
+                     </x-linku>
+
+                     <x-linku :href="route('admin.courts.index')" :active="request()->routeIs('admin.courts.*')">
+                         {{ __('Courts') }}
+                     </x-linku>
+                     <x-linku :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                         {{ __('Customers') }}
+                     </x-linku>
+                 @endif
+             @endauth
          </nav>
      </div>
      <!-- END Mobile Navigation -->

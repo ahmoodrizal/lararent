@@ -15,6 +15,24 @@ use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
+    public function index()
+    {
+        $transactions = Auth::user()->transactions()->latest()->get();
+
+        return response()->json([
+            'message' => 'success',
+            'transactions' => $transactions
+        ], 200);
+    }
+
+    public function show(Transaction $transaction)
+    {
+        return response()->json([
+            'message' => 'success',
+            'transaction' => $transaction
+        ], 200);
+    }
+
     public function create(Request $request)
     {
         $court = Court::find($request['court_id']);
