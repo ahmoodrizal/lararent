@@ -6,34 +6,34 @@
     {{-- Jumbotron End --}}
 
     {{-- Booking Area Start --}}
-    <div id="booking_area" class="max-w-7xl w-full h-full p-10 bg-slate-100 mx-auto my-14 rounded-md">
-        <div class="grid md:grid-cols-2 grid-cols-1 gap-3">
+    <div id="booking_area" class="w-full h-full p-10 mx-auto rounded-md max-w-7xl bg-slate-100 my-14">
+        <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
             @foreach ($courts as $court)
-                <div class="p-4 flex flex-col gap-y-3 items-center">
-                    <div class="relative overflow-hidden w-full group cursor-pointer">
+                <div class="flex flex-col items-center p-4 gap-y-3">
+                    <div class="relative w-full overflow-hidden cursor-pointer group">
                         <div
-                            class="absolute w-full h-full bg-black/60 rounded-md hidden group-hover:flex items-center justify-center">
-                            <a href="#"
-                                class="text-white py-2 px-4 rounded-md text-sm border border-white font-semibold text-center">Booking
-                                Now</a>
+                            class="absolute items-center justify-center hidden w-full h-full rounded-md bg-black/60 group-hover:flex">
+                            <a href="{{ route('schedule', $court->slug) }}"
+                                class="px-4 py-2 text-sm font-semibold text-center text-white border border-white rounded-md">Check
+                                Schedule</a>
                         </div>
                         <img src="{{ Storage::url('banners/' . $court->banner) }}" alt="banner"
-                            class="rounded-md max-h-72 w-full object-cover">
+                            class="object-cover w-full rounded-md max-h-72">
                     </div>
                     <div class="flex items-center justify-between w-full">
-                        <p class="capitalize font-header text-sm tracking-wider">{{ $court->name }}</p>
-                        <div class="flex gap-x-2 items-center">
+                        <p class="text-sm tracking-wider capitalize font-header">{{ $court->name }}</p>
+                        <div class="flex items-center gap-x-2">
                             <div
                                 class="py-1 px-3 rounded-md border {{ $court->type == 'futsal' ? 'border-indigo-400' : 'border-green-400' }}">
-                                <span class="uppercase text-xs tracking-widest">{{ $court->type }}</span>
+                                <span class="text-xs tracking-widest uppercase">{{ $court->type }}</span>
                             </div>
                             @php
                                 $today = \Carbon\Carbon::now();
                                 $isWeekend = $today->isWeekend();
                             @endphp
-                            <div class="py-1 px-3 rounded-md border border-orange-400">
+                            <div class="px-3 py-1 border border-orange-400 rounded-md">
                                 <span
-                                    class="uppercase text-xs tracking-widest">{{ $isWeekend ? Number::currency($court->weekday_price, 'IDR', 'id_ID') : Number::currency($court->weekday_price, 'IDR', 'id_ID') }}</span>
+                                    class="text-xs tracking-widest uppercase">{{ $isWeekend ? Number::currency($court->weekday_price, 'IDR', 'id_ID') : Number::currency($court->weekday_price, 'IDR', 'id_ID') }}</span>
                             </div>
                         </div>
                     </div>

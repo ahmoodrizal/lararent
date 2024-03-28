@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\CourtController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TransactionController;
-use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\CourtController;
+use App\Http\Controllers\Admin\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,16 +18,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Public Route
 Route::get('/', [HomeController::class, 'index'])->name('welcome');
+Route::get('/schedule/{court:slug}', [HomeController::class, 'schedule'])->name('schedule');
 
+// Authenticated Route
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/dashboard', [TransactionController::class, 'dashboard'])->name('dashboard');
+    Route::get('/transactions/{transaction:unique_code}', [HomeController::class, 'payment'])->name('payment');
+
+    // Create an Order
+    Route::post('/schedule/{court:slug}/create', [HomeController::class, 'order'])->name('order');
 });
 
+// Admin Route
 Route::middleware(['auth', 'ensureRole:admin'])->prefix('admin')->name('admin.')->group(function () {
 
     // User Management

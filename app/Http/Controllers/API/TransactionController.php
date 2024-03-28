@@ -96,18 +96,6 @@ class TransactionController extends Controller
 
         $transaction = Transaction::create($data);
 
-        // Create Schedule
-        for ($i = 0; $i < $request['hours']; $i++) {
-            $time_start = $booked_time->copy()->addHours($i);
-            $time_end = $time_start->copy()->addHour();
-            Schedule::create([
-                'transaction_id' => $transaction->id,
-                'court_id' => $court->id,
-                'booking_start' => $time_start,
-                'booking_end' => $time_end,
-            ]);
-        }
-
         if ($request['payment_method'] == 'bank_transfer') {
             // Midtrans Virtual Account Integration with Core API
             $midtrans = new CreateVirtualAccountService($transaction->load('user', 'court'));
@@ -129,6 +117,18 @@ class TransactionController extends Controller
 
             $transaction->payment_link = $apiResponse->actions[0]->url;
             $transaction->save();
+        }
+
+        // Create Schedule
+        for ($i = 0; $i < $request['hours']; $i++) {
+            $time_start = $booked_time->copy()->addHours($i);
+            $time_end = $time_start->copy()->addHour();
+            Schedule::create([
+                'transaction_id' => $transaction->id,
+                'court_id' => $court->id,
+                'booking_start' => $time_start,
+                'booking_end' => $time_end,
+            ]);
         }
 
         return response()->json([

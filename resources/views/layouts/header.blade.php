@@ -20,7 +20,7 @@
                  @auth
                      @if (Auth::user()->role == 'admin')
                          <x-linku :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                             {{ __('Dashboard') }}
+                             {{ __('Transactions') }}
                          </x-linku>
                          <x-linku :href="route('admin.courts.index')" :active="request()->routeIs('admin.courts.*')">
                              {{ __('Courts') }}
@@ -29,6 +29,9 @@
                              {{ __('Customers') }}
                          </x-linku>
                      @endauth
+                     <x-linku :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                         {{ __('My Dashboard') }}
+                     </x-linku>
                  @endif
              </nav>
              <!-- END Desktop Navigation -->
@@ -180,7 +183,7 @@
              @auth
                  @if (Auth::user()->role == 'admin')
                      <x-linku :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                         {{ __('Dashboard') }}
+                         {{ __('Transactions') }}
                      </x-linku>
 
                      <x-linku :href="route('admin.courts.index')" :active="request()->routeIs('admin.courts.*')">
